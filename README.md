@@ -8,11 +8,13 @@ A cut norm based method to evaluate uniform and independent sampling in network 
 + [R](www.r-project.org) core libraries
 
 ### Installation
-1. Download/clone this repository into your working directory. 
-2. Open a command-line terminal
-3. Change directory to the src/software folder as follows:
-`cd src/software`
-4. Open the file `start_running_indecut.sh` and make the following changes if applies:
++ Download/clone this repository into your working directory. 
++ Open a command-line terminal
++ Change directory to the src/software folder as follows:
+```
+cd src/software
+```
++ Open the file `start_running_indecut.sh` and make the following changes if applies:
 ..4. set PYTHON variable to the path that Python is installed on your computer.
 ..4. The input graph is a bipartite graph that is defined by a name, source out-degree and target in-degree sequences (comma separated sequence). You can enter your own input graph's properties as follows: 
 ..* change `graphname` to any arbitarary name. The name can contain characters and numbers. 
