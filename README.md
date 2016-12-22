@@ -11,15 +11,14 @@ A cut norm based method to evaluate uniform and independent sampling in network 
 1. Download/clone this repository into your working directory. 
 2. Open a command-line terminal
 3. Change directory to the src/software folder as follows:
-
   ```
   cd src/software
   ```
   
 4. Open the file `start_running_indecut.sh` and make the following changes (if requires):
   1. set PYTHON variable to the path that Python is installed on your computer.
-    #Example
-    ```
+    ```bash
+    # Example
     PYTHON=/usr/bin/python
     ```
     
