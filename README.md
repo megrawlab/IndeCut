@@ -8,9 +8,13 @@ A cut norm based method to evaluate uniform and independent sampling in network 
 + [R](www.r-project.org) core libraries
 
 ### Installation
-```bash
-# Download IndeCUT
-Download/clone this repository into your machine. 
+1. Download/clone this repository into your working directory. 
+2. Open a command-line terminal
+3. Change directory to the src/software folder as follows:
+```
+cd src/software
+```
+
 
 
 
