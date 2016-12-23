@@ -1,0 +1,9 @@
+PKG_CFLAGS=-DUSING_R -I. -g -O2 -I/usr/include/libxml2 -g -O2 -I/usr/include/libxml2 -DPACKAGE_VERSION=\"0.5.4\" \
+	-DINTERNAL_ARPACK -DINTERNAL_LAPACK -DINTERNAL_BLAS
+PKG_CXXFLAGS= -DUSING_R
+PKG_LIBS=-lxml2 -lz -lm -lgmp
+
+all: $(SHLIB)
+
+dlamch.o : dlamch.c
+	$(CC) $(R_XTRA_FFLAGS) $(PKG_CFLAGS) $(FPICFLAGS) $(SHLIB_CFLAGS) -ffloat-store -c $<
