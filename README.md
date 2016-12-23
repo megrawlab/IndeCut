@@ -25,7 +25,7 @@ A cut norm based method to evaluate uniform and independent sampling in network 
   2. The input graph is a bipartite graph that is defined by a name, source out-degree and target in-degree sequences (comma separated sequence). 
   ```bash
   # Default settings
-  graphname=graph1
+  graphname="graph1"
   src_degdist="10,1,1,1,1,1,1,1,1,1,1"
   target_degdist="10,1,1,1,1,1,1,1,1,1,1"
   ```
@@ -39,5 +39,11 @@ A cut norm based method to evaluate uniform and independent sampling in network 
   ```bash
   ./start_running_indecut.sh
   ```
+6. When the running finishes the following text message wil appear on the terminal:
+  ```bash
+  "Program finished successfully and results saved into cutnorm_results/$graphname.cutnorms.csv file!"
+  ```
+7. The output file will be saved into `cutnorm_results` directory (`cutnorm_results/$graphname.cutnorms.csv`).
+
 
 
