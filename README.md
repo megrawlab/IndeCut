@@ -43,7 +43,9 @@ A cut norm based method to evaluate uniform and independent sampling in network 
   ```bash
   "Program finished successfully and results saved into cutnorm_results/$graphname.cutnorms.csv file!"
   ```
+  
 7. The output file will be saved into `cutnorm_results` directory (`cutnorm_results/$graphname.cutnorms.csv`).
 
+## License
 
 
