@@ -12,7 +12,7 @@ A cut norm based method to evaluate uniform and independent sampling in network 
 2. Open a command-line terminal
 3. Change directory to the src/software folder as follows:
   ```bash
-  cd src/software
+  cd software
   ```
   
 4. Open the file `start_running_indecut.sh` and make the following changes (if requires):
