@@ -7,7 +7,17 @@ A cut norm based method to evaluate uniform and independent sampling in network 
 + [Java](https://java.com/en/download/) runtime enviornment 
 + [R](www.r-project.org) core libraries
 
-### Installation
+### Required Tools and Libraries
+IndeCUT performs uniform/independent sampling evaluation on a set of graphs that is produces by each network motif discovery algorithm. In this package we provide the following pre-compiled network motif discovery tools which are mentioned in the paper:
+
++ FANMOD: 
+  +The binary files required for running FANMOD are ocated at fanmod direcotory.
+  +fanmodmultrg is a pre-compiled C execuatble file which outputs randomly generated graphs by FANMOD algorithm into fn_out direcotory.
++ WaRSwap
++ DIA-MCIS
++ CoMoFinder
+
+## Installation
 1. Download/clone this repository into your working directory. 
 2. Open a command-line terminal
 3. Change directory to the src/software folder as follows:
