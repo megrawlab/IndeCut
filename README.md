@@ -12,11 +12,22 @@ IndeCUT performs uniform/independent sampling evaluation on a set of graphs that
 
 + FANMOD
 
-  1. The binary files required for running FANMOD are ocated at fanmod direcotory.
-  2. fanmodmultrg is a pre-compiled C execuatble file which outputs randomly generated graphs by FANMOD algorithm into fn_out direcotory.
+  1. The binary files required for running `FANMOD` are located at `fanmod` folder.
+  2. `fanmodmultrg` is a pre-compiled `C` program which outputs randomly generated graphs by `FANMOD` algorithm into `fanmod/fn_out` folder.
 + WaRSwap
+
+  1. `WaRSwap` is implemented in `R` and is located at `warswap` folder.
+  2. This program outputs the random graphs into `warswap/wr_out` folder.  
 + DIA-MCIS
+
+  1. The binary files required for running `DIA-MCIS` are located at `diamcis` folder.
+  2. `dia-mcis-standard` is a pre-compiled `C` program which outputs randomly generated graphs by `DIA-MCIS` algorithm into `diamcis/di_out` folder.
 + CoMoFinder
+
+  1. This tool is implemented in java and the binary classes required for running `CoMoFinder` are located at `comofinder` folder.
+  2. `comoFinder_randout.jar` is a pre-compiled `Java` program which outputs randomly generated graphs by `CoMoFinder` algorithm into `comofinder/cf_out` folder.
+  
++ CSDP
 
 ## Installation
 1. Download/clone this repository into your working directory. 
