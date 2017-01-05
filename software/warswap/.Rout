@@ -1,0 +1,60 @@
+ARGUMENT 'BATCH' __ignored__
+
+ARGUMENT '1' __ignored__
+
+ARGUMENT '2147483647' __ignored__
+
+ARGUMENT '1' __ignored__
+
+ARGUMENT '50' __ignored__
+
+ARGUMENT 'graph1.SEEDS.txt' __ignored__
+
+
+R version 3.2.2 (2015-08-14) -- "Fire Safety"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-redhat-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> # This script takes an input seed inputSeed for the random number generator,
+> # draws ndraws random integers from [minSeed, maxSeed]
+> # and writes the drawn integers to output file outFname.
+> # If inputStartingDraw is greater than 1, draws indexed by
+> # inputStartingDraw:(inputStartingDraw + ndraws - 1) are output.
+> 
+> args <- commandArgs()
+> 
+> # For batch mode
+> myargs <- args[4:length(args)]
+> 
+> minSeed <- as.integer(myargs[1])
+> maxSeed <- as.integer(myargs[2])
+> inputSeed <- as.integer(myargs[3])
+> inputStartingDraw <- as.integer(myargs[4])
+> ndraws <- as.integer(myargs[5])
+Warning message:
+NAs introduced by coercion 
+> outFname <- myargs[6]
+> 
+> set.seed(inputSeed)
+> if (inputStartingDraw < 1) {
++   inputStartingDraw <- 1
++ }
+> totaldraws <- inputStartingDraw + ndraws - 1
+> tmpseeds <- round(runif(totaldraws, min=minSeed, max=maxSeed))
+Error in runif(totaldraws, min = minSeed, max = maxSeed) : 
+  invalid arguments
+Execution halted
