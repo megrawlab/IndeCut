@@ -3,41 +3,34 @@ A cut norm based method to evaluate uniform and independent sampling in network 
 
 ## Requirements
 + Linux operating system
++ Java 1.6+
 + 4GB of RAM minimum
-+ [Java](https://java.com/en/download/) runtime enviornment 
 + [R](www.r-project.org) core libraries
 
-### Required Tools and Libraries
-IndeCUT performs uniform/independent sampling evaluation on a set of graphs that is produces by each network motif discovery algorithm. In this package we provide the following pre-compiled network motif discovery tools which are mentioned in the paper:
+### Network motif discovery tools
+Four network motif discover tools along with their source codes are provided under `software` folder. 
 
-+ FANMOD
-
-  1. The binary files required for running `FANMOD` are located at `fanmod` folder.
-  2. `fanmodmultrg` is a pre-compiled `C` program which outputs randomly generated graphs by `FANMOD` algorithm into `fanmod/fn_out` folder.
-+ WaRSwap
-
-  1. `WaRSwap` is implemented in `R` and is located at `warswap` folder.
-  2. This program outputs the random graphs into `warswap/wr_out` folder.  
-+ DIA-MCIS
-
-  1. The binary files required for running `DIA-MCIS` are located at `diamcis` folder.
-  2. `dia-mcis-standard` is a pre-compiled `C` program which outputs randomly generated graphs by `DIA-MCIS` algorithm into `diamcis/di_out` folder.
-+ CoMoFinder
-
-  1. This tool is implemented in java and the binary classes required for running `CoMoFinder` are located at `comofinder` folder.
-  2. `comoFinder_randout.jar` is a pre-compiled `Java` program which outputs randomly generated graphs by `CoMoFinder` algorithm into `comofinder/cf_out` folder.
+1. FANMOD
+  This software package is located under `software/fanmod` folder. The `source-code` folder contains required `C` and `C++` libraries and source codes to make an executable `FANMOD` tool (`makefile` is located at `software/fanmod/source-code`).
   
-+ CSDP
+2. DIA-MCIS
+  This software package is located under `software/diamcis` folder. The `source-code` folder contains required `C` libraries and source codes to make an executable `DIA-MCIS` tool (`makefile` is located at `software/diamcis/source-code`).
+  
+3. CoMoFinder
+  This software package is located under `software/comofinder` folder. This software is written in `Java` and required libraries to compile and make an executable `jar` file is located at `software/comofinder/`.
+  
+4. WaRSwap
+  This software package is located under `software/warswap` folder. This software package is written in `R` and doesn't need any compilation.
 
-## Installation
+## Installing and Running IndeCut
 1. Download/clone this repository into your working directory. 
 2. Open a command-line terminal
-3. Change directory to the src/software folder as follows:
+3. Change directory to the `software` folder as follows:
   ```bash
   cd software
   ```
   
-4. Open the file `start_running_indecut.sh` and make the following changes (if requires):
+4. Open the file `makefile` and perform the following changes (if required):
   1. set PYTHON variable to the path that Python is installed on your computer.
     ```bash
     # Example
@@ -47,26 +40,25 @@ IndeCUT performs uniform/independent sampling evaluation on a set of graphs that
   2. The input graph is a bipartite graph that is defined by a name, source out-degree and target in-degree sequences (comma separated sequence). 
   ```bash
   # Default settings
-  graphname="graph1"
-  src_degdist="10,1,1,1,1,1,1,1,1,1,1"
-  target_degdist="10,1,1,1,1,1,1,1,1,1,1"
+  graphname = graph1
+  src_degdist = 6,1,1,1,1,1,1,6,1,1,1,1,1,1
+  target_degdist = 6,1,1,1,1,1,1,6,1,1,1,1,1,1
+  ngraphs = 5000
   ```
   
     You can change the above configurations as follows: 
-    1. change `graphname` to any arbitarary name. The name can contain characters and numbers. 
+    1. change `graphname` to any arbitrary name. The name can contain characters and numbers. 
     2. change `src_degdist` to a new source out-degree sequence. 
     3. change `target_degdist` to a new target in-degree sequence.
+    4. change number of samples by mofiying the `ngraphs` variable.
 
-5. Run IndeCUT:
+5. Running IndeCut:
   ```bash
-  ./start_running_indecut.sh
+  make all
   ```
-6. When the running finishes the following text message wil appear on the terminal:
-  ```bash
-  "Program finished successfully and results saved into cutnorm_results/$graphname.cutnorms.csv file!"
-  ```
-  
-7. The output file will be saved into `cutnorm_results` directory (`cutnorm_results/$graphname.cutnorms.csv`).
+  The `make all` command starts compiling all the network motif discovery tools and then running each tool to generate the samples. It then computes average matrices `A` for each network motif discovery samples and computes maximum entropy matrix `Z`. At the end, it computes cut norm extimates for each algorithm and records the results into `results` folder for each graph separately.
+
+7. The output file will be saved into `results` directory (`results/$graphname.cutnorms.txt`).
 
 ### datasets
 Human regulatory network is published under Encode project and we downloaded it from: `http://encodenets.gersteinlab.org`.
