@@ -68,6 +68,9 @@ IndeCUT performs uniform/independent sampling evaluation on a set of graphs that
   
 7. The output file will be saved into `cutnorm_results` directory (`cutnorm_results/$graphname.cutnorms.csv`).
 
+### datasets
+Human regulatory network is published under Encode project and we downloaded it from: `http://encodenets.gersteinlab.org`.
+
 ## License
 Please see the LICENSE file for copyright and distribution rights.
 
