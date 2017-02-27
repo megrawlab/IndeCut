@@ -59,6 +59,9 @@ Four network motif discover tools along with their source codes are provided und
 
 7. The cut norm estimates for each algorithm  will be saved into `results` directory (`results/$graphname.cutnorms.txt`).
 
+### datasets
+Human regulatory network is published under Encode project and we downloaded it from: `http://encodenets.gersteinlab.org`.
+
 ## License
 Please see the LICENSE file for copyright and distribution rights.
 
