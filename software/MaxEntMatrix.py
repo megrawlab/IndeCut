@@ -12,26 +12,23 @@ import warnings
 
 
 def main(argv):
-	file_path_c = None
-	file_path_r = None
-	file_path_output = None
-	try:
-		opts, args = getopt.getopt(argv, "c:r:o:", ["ColumnDegrees=", "RowDegrees=", "Output="])
-	except getopt.GetoptError:
-		print 'Call using: python MaxEntMatrix.py -c <ColumnDegrees.csv> -r <RowDegrees.csv> -o <Output.csv>'
-		sys.exit(2)
-	for opt, arg in opts:
-		if opt == '-h':
-			print 'Call using: python MaxEntMatrix.py -c <ColumnDegrees.csv> -r <RowDegrees.csv> -o <Output.csv>'
-			sys.exit(2)
-		elif opt in ("-c", "--ColumnDegrees"):
-			file_path_c = arg
-		elif opt in ("-r", "--RowDegrees"):
-			file_path_r = arg
-		elif opt in ("-o", "--Output"):
-			file_path_output = arg
-	#Run the main program
-	calc_max_ent(file_path_c, file_path_r, file_path_output)
+        file_path_degseqs = None
+        file_path_output = None
+        try:
+                opts, args = getopt.getopt(argv, "i:o:", ["degseq_file=", "Output="])
+        except getopt.GetoptError:
+                print 'Call using: python MaxEntMatrix.py -i <degseq.csv> -o <Output.csv>'
+                sys.exit(2)
+        for opt, arg in opts:
+                if opt == '-h':
+                        print 'Call using: python MaxEntMatrix.py -i <degseq.csv> -o <Output.csv>'
+                        sys.exit(2)
+                elif opt in ("-i", "--degseq"):
+                        file_path_degseqs = arg
+                elif opt in ("-o", "--Output"):
+                        file_path_output = arg
+        #Run the main program
+        calc_max_ent(file_path_degseqs, file_path_output)
 
 def G(x,r,c): #This is the G function on page 3 of Barvinok 2009
 	m = len(r)
@@ -76,14 +73,15 @@ def myCallback(x):
 	print(x)
 
 
-def calc_max_ent(file_path_c, file_path_r, file_path_output):
-	assert isinstance(file_path_c,basestring), file_path_c
-	assert isinstance(file_path_r,basestring), file_path_r
-	assert isinstance(file_path_output,basestring), file_path_output
-	
-	#Read in files
-	c_degrees = np.genfromtxt(file_path_c,delimiter=',')
-	r_degrees = np.genfromtxt(file_path_r,delimiter=',')
+def calc_max_ent(file_path_degseqs, file_path_output):
+        assert isinstance(file_path_degseqs,basestring), file_path_degseqs
+        assert isinstance(file_path_output,basestring), file_path_output
+
+        #Read in files
+        fp = open(file_path_degseqs, "r")
+        r_degrees = np.asanyarray(fp.readline().rstrip().split(","), dtype = int) # Row sum = src out-degrees
+        c_degrees = np.asanyarray(fp.readline().rstrip().split(","), dtype = int) # Col sum = target in-degrees
+        fp.close()
 	
 	m = len(r_degrees)
 	n = len(c_degrees)
@@ -100,7 +98,7 @@ def calc_max_ent(file_path_c, file_path_r, file_path_output):
 		#res = scipy.optimize.minimize(G, x0, args=(r_degrees,c_degrees), jac=JacG, method='Newton-CG', options={'disp':True}, callback=myCallback)
 		with warnings.catch_warnings():
 			warnings.simplefilter("ignore")
-			if min(len(r_degrees), len(c_degrees)) < 100:
+			if max(len(r_degrees), len(c_degrees)) < 100:
 				res = scipy.optimize.minimize(G, x0, args=(r_degrees,c_degrees))
 			else:
 				x0 = np.ones(len(x0))

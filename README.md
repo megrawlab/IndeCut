@@ -37,28 +37,27 @@ Four network motif discover tools along with their source codes are provided und
     PYTHON=/usr/bin/python
     ```
     
-  2. The input graph is a bipartite graph that is defined by a name, source out-degree and target in-degree sequences (comma separated sequence). 
+  2. Specify a name for graph/network, enter the path to the file containing degree sequence of input bipartite graph as follows:
   ```bash
-  # Default settings
-  graphname = graph1
-  src_degdist = 6,1,1,1,1,1,1,6,1,1,1,1,1,1
-  target_degdist = 6,1,1,1,1,1,1,6,1,1,1,1,1,1
+  # graphname (dronet example as default)
+  graphname = dronet_miR-TF 
+
+  # Path to a file that has two lines: 
+  # 1st line: comma separated "out-degrees" corresponding to source nodes
+  # 2nd line: comma separated "in-degrees" corresponding to target nodes
+  input_degree_seq_file = input_networks/dronet_miR-TF.csv
+
+  # Number of samples to generate for each algorithm
   ngraphs = 5000
   ```
   
-    You can change the above configurations as follows: 
-    1. change `graphname` to any arbitrary name. The name can contain characters and numbers. 
-    2. change `src_degdist` to a new source out-degree sequence. 
-    3. change `target_degdist` to a new target in-degree sequence.
-    4. change number of samples by mofiying the `ngraphs` variable.
-
 5. Running IndeCut:
   ```bash
-  make all
+  make all_parallel   # For parallel executaion on multiple processors
   ```
-  The `make all` command starts compiling all the network motif discovery tools and then running each tool to generate the samples. It then computes average matrices `A` for each network motif discovery samples and computes maximum entropy matrix `Z`. At the end, it computes cut norm extimates for each algorithm and records the results into `results` folder for each graph separately.
+  The `make all_parallel` command starts compiling all the network motif discovery tools and then running each tool to generate the samples. It then computes average matrices `A` for each network motif discovery samples and computes maximum entropy matrix `Z`. At the end, it computes cut norm extimates for each algorithm and records the results into `results` folder for each graph separately.
 
-7. The output file will be saved into `results` directory (`results/$graphname.cutnorms.txt`).
+7. The cut norm estimates for each algorithm  will be saved into `results` directory (`results/$graphname.cutnorms.txt`).
 
 ## License
 Please see the LICENSE file for copyright and distribution rights.
