@@ -42,6 +42,7 @@ all_serial: compile_tools generate_graph_from_deg run_netmotifs compute_A comput
 
 #### Runs each step in parallel to speed up the whole procedure ####
 all_parallel:
+	$(MAKE) compile_tools
 	$(MAKE) generate_graph_from_deg
 	$(MAKE) run_netmotifs -j 4
 	$(MAKE) compute_A -j 5
@@ -50,7 +51,7 @@ all_parallel:
 
 ##### Compile programs #######
 compile_tools: make_diamcis make_fanmod make_comofinder
-
+	chmod -R 755 .
 make_diamcis: 
 	make -C $(diamcis_srcdir) clean
 	make -C $(diamcis_srcdir) all
