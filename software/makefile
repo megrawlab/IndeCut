@@ -1,7 +1,7 @@
 graphname = dronet_miR-TF
 input_degree_seq_file = input_networks/$(graphname).csv
 
-ngraphs = 100
+ngraphs = 5000
 result_outdir = results
 result_outfile = $(result_outdir)/$(graphname)_$(ngraphs).cutnorms.txt
 

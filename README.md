@@ -3,7 +3,7 @@ A cut norm based method to evaluate uniform and independent sampling in network 
 
 ## Requirements
 + Linux operating system
-+ Java 1.6+
++ Java 1.8+
 + 4GB of RAM minimum
 + [R](www.r-project.org) core libraries
 
