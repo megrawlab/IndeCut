@@ -54,6 +54,10 @@ Four network motif discover tools along with their source codes are provided und
 5. Running IndeCut:
   ```bash
   make all_parallel   # For parallel executaion on multiple processors
+  
+  or
+  
+  make all_serial   # For serial executaion which is slower than parallel executaion
   ```
   The `make all_parallel` command starts compiling all the network motif discovery tools and then running each tool to generate the samples. It then computes average matrices `A` for each network motif discovery samples and computes maximum entropy matrix `Z`. At the end, it computes cut norm extimates for each algorithm and records the results into `results` folder for each graph separately.
 
