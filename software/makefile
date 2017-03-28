@@ -67,7 +67,7 @@ make_comofinder:
 
 generate_graph_from_deg:
 	if [ ! -d $(graphs_dir) ]; then mkdir -p $(graphs_dir); fi
-	bipartite_graph_generation.R $(input_degree_seq_file) "$(graphs_dir)/$(graphname).fanmod"
+	./bipartite_graph_generation.R $(input_degree_seq_file) "$(graphs_dir)/$(graphname).fanmod"
 
 ##### Run network motifs discovery algorithms ####
 run_netmotifs: run_fanmod run_diamcis run_warswap run_comofinder
