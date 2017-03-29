@@ -65,6 +65,13 @@ Four network motif discover tools along with their source codes are provided und
 
 7. The cut norm estimates for each algorithm  will be saved into `results` directory (`results/$graphname.cutnorms.txt`).
 
+## Troubleshooting
+* comoFinder compile error:
+  ** Why: This happens for two reasons: 1) The java is not installed, or 2) Installed java version is older than 1.8
+  ** Solution: Install java or update it to newest version
+  
+ 
+
 ### datasets
 Human regulatory network is published under Encode project and we downloaded it from: `http://encodenets.gersteinlab.org`.
 
