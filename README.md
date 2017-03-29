@@ -6,6 +6,8 @@ A cut norm based method to evaluate uniform and independent sampling in network 
 + Java 1.8+
 + 4GB of RAM minimum
 + [R](www.r-project.org) core libraries
++ GNU gmp library
++ Python2.7+
 
 ### Network motif discovery tools
 Four network motif discover tools along with their source codes are provided under `software` folder. 
@@ -20,14 +22,14 @@ Four network motif discover tools along with their source codes are provided und
   This software package is located under `software/comofinder` folder. This software is written in `Java` and required libraries to compile and make an executable `jar` file is located at `software/comofinder/`.
   
 4. WaRSwap
-  This software package is located under `software/warswap` folder. This software package is written in `R` and doesn't need any compilation.
+  This software package is located under `software/warswap` folder. This software package is written in `R` and doesn't need any compilation. WaRSwap uses "igraph" library which requires that "libgmp.so.3" be available on your machine under /usr/lib/ directory. 
 
 ## Installing and Running IndeCut
 1. Download/clone this repository into your working directory. 
 2. Open a command-line terminal
 3. Change directory to the `software` folder as follows:
   ```bash
-  cd software
+  cd IndeCut/software
   ```
   
 4. Open the file `makefile` and perform the following changes (if required):
@@ -62,6 +64,25 @@ Four network motif discover tools along with their source codes are provided und
   The `make all_parallel` command starts compiling all the network motif discovery tools and then running each tool to generate the samples. It then computes average matrices `A` for each network motif discovery samples and computes maximum entropy matrix `Z`. At the end, it computes cut norm extimates for each algorithm and records the results into `results` folder for each graph separately.
 
 7. The cut norm estimates for each algorithm  will be saved into `results` directory (`results/$graphname.cutnorms.txt`).
+
+## Troubleshooting
+IndeCut package contains different network motif tools which have their own requirements. Some sommon problem may arise while running given package which we provide solution for them as follows:
+
+* comoFinder compile error: `javac -g -d classes -cp lib/jsr166y-1.7.0.jar -target 1.8 src/ccbr/utoronto/ca/*/*.java javac: invalid target release: 1.8`
+
+  This happens for two reasons: 1) The java is not installed, or 2) Installed java version is older than 1.8
+  
+  Solution: Install java or update it to newest version
+  
+* WaRSwap error: `Error : .onLoad failed in loadNamespace() for 'igraph', details`:
+  Why: R is not installed in your machine or GNU gmp library is not installed or `libgmp.so.3` is not in the library path (such as /usr/bin)
+  
+  Solution: Download and install R from https://www.r-project.org.
+  If R is already installed on your machine, download and install GNU gmp package from https://gmplib.org. Follow the instructions to make sure that the `gmp` libs are installed. If you still get the error from WaRSwap, it means you need to create a softlink (or copy the library from where it is installed) to libgmp.so.4 in the `/usr/lib` directory.
+
+* CSDP Error: `error while loading shared libraries: liblapack.so.3: cannot open shared object file: No such file or directory`
+
+  The pre-compiled CSDP is working on newer versions of operating systems not the older versions.
 
 ### datasets
 Human regulatory network is published under Encode project and we downloaded it from: `http://encodenets.gersteinlab.org`.
