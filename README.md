@@ -68,15 +68,21 @@ Four network motif discover tools along with their source codes are provided und
 ## Troubleshooting
 IndeCut package contains different network motif tools which have their own requirements. Some sommon problem may arise while running given package which we provide solution for them as follows:
 
-* comoFinder compile error:
-  Why: This happens for two reasons: 1) The java is not installed, or 2) Installed java version is older than 1.8
+* comoFinder compile error: `javac -g -d classes -cp lib/jsr166y-1.7.0.jar -target 1.8 src/ccbr/utoronto/ca/*/*.java javac: invalid target release: 1.8`
+
+  This happens for two reasons: 1) The java is not installed, or 2) Installed java version is older than 1.8
+  
   Solution: Install java or update it to newest version
   
-* WaRSwap error:
+* WaRSwap error: `Error : .onLoad failed in loadNamespace() for 'igraph', details`:
   Why: R is not installed in your machine or GNU gmp library is not installed or `libgmp.so.3` is not in the library path (such as /usr/bin)
+  
   Solution: Download and install R from https://www.r-project.org.
   If R is already installed on your machine, download and install GNU gmp package from https://gmplib.org. Follow the instructions to make sure that the `gmp` libs are installed. If you still get the error from WaRSwap, it means you need to create a softlink (or copy the library from where it is installed) to libgmp.so.4 in the `/usr/lib` directory.
- 
+
+* CSDP Error: `error while loading shared libraries: liblapack.so.3: cannot open shared object file: No such file or directory`
+
+  The pre-compiled CSDP is working on newer versions of operating systems not the older versions.
 
 ### datasets
 Human regulatory network is published under Encode project and we downloaded it from: `http://encodenets.gersteinlab.org`.
