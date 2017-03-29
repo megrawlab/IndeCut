@@ -6,6 +6,8 @@ A cut norm based method to evaluate uniform and independent sampling in network 
 + Java 1.8+
 + 4GB of RAM minimum
 + [R](www.r-project.org) core libraries
++ GNU gmp library
++ Python2.7+
 
 ### Network motif discovery tools
 Four network motif discover tools along with their source codes are provided under `software` folder. 
@@ -20,14 +22,14 @@ Four network motif discover tools along with their source codes are provided und
   This software package is located under `software/comofinder` folder. This software is written in `Java` and required libraries to compile and make an executable `jar` file is located at `software/comofinder/`.
   
 4. WaRSwap
-  This software package is located under `software/warswap` folder. This software package is written in `R` and doesn't need any compilation.
+  This software package is located under `software/warswap` folder. This software package is written in `R` and doesn't need any compilation. WaRSwap uses "igraph" library which requires that "libgmp.so.3" be available on your machine under /usr/lib/ directory. 
 
 ## Installing and Running IndeCut
 1. Download/clone this repository into your working directory. 
 2. Open a command-line terminal
 3. Change directory to the `software` folder as follows:
   ```bash
-  cd software
+  cd IndeCut/software
   ```
   
 4. Open the file `makefile` and perform the following changes (if required):
