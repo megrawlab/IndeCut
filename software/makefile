@@ -1,7 +1,7 @@
 graphname = dronet_miR-TF
 input_degree_seq_file = input_networks/$(graphname).csv
 
-ngraphs = 5000
+ngraphs = 50
 result_outdir = results
 result_outfile = $(result_outdir)/$(graphname)_$(ngraphs).cutnorms.txt
 
@@ -37,6 +37,34 @@ di_cutnorm = $(indecut_outdir)/$(graphname)_diamcis_$(ngraphs)_cutnorm.csv
 z_outfile = $(indecut_outdir)/$(graphname)_Z1_$(ngraphs).csv
 z_cutnorm = $(indecut_outdir)/$(graphname)_Z_$(ngraphs)_cutnorm.csv
 
+init:
+Rcore := $(shell command -v R 2> /dev/null)
+JAVA := $(shell command -v java 2> /dev/null)
+
+ifndef Rcore
+	$(error "R is not available please install R")
+endif
+$(info "Checking R .. yes!")
+ifndef JAVA
+    	$(error "JAVA is not available please install java 1.8+")
+endif
+$(info "Checking Java .. yes!")
+
+JVERSION := $(shell java -version 2>&1 | awk -F '\"' '/version/ {print $$2}')
+JAVAV := $(shell expr `java -version 2>&1 | awk -F '\"' '/version/ {print $$2}'` \>= 1.8 )
+
+ifeq "$(JAVAV)" "1"
+   	$(info "Checking java version .. $(JVERSION)")
+endif
+
+GMPLIB = "/usr/lib/libgmp.so.3"
+ifneq ("$(wildcard $(GMPLIB))","")
+FILE_EXISTS = 1
+else
+$(warning "Checking GMP library .. Failed! Install GNU gmp or copy libgmp.so.3 into /usr/lib/")
+endif
+
+#	$(MAKE) -f Makefile_check
 #### For serial execution of steps ####
 all_serial: compile_tools generate_graph_from_deg run_netmotifs compute_A compute_Z compute_cutnorms generate_results
 
@@ -50,7 +78,7 @@ all_parallel:
 	$(MAKE) generate_results
 
 ##### Compile programs #######
-compile_tools: make_diamcis make_fanmod make_comofinder
+compile_tools: init make_diamcis make_fanmod make_comofinder
 	chmod -R 755 .
 make_diamcis: 
 	make -C $(diamcis_srcdir) clean
