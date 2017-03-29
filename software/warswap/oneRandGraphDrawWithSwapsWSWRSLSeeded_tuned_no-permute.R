@@ -1,8 +1,9 @@
+#!/usr/bin/Rscript
 library(igraph)
 
 # Handle command line arguments
-args <- commandArgs()
-myargs <- args[4:length(args)]
+myargs <- commandArgs(trailingOnly = TRUE)
+#myargs <- args[4:length(args)]
 edgefile <- myargs[1]
 vertexfile <- myargs[2]
 edgefileout <- myargs[3]
@@ -123,12 +124,12 @@ sortedLayerDrawWithSwaps <- function(gIN, color1, color2, drawPlot, dBug) {
 #EXTRA FOR SMALL GRAPHS TEST (should be deleted for orig net
   FAC <- FAC + 3
   
-  print(paste("**** M = ", m, sep=""))
-  print(paste("Max_out = ", smax, sep=""))
-  print(paste("Max_in = ", tmax, sep=""))
-  print(paste("Min_in = ", tmin, sep=""))
-  print(paste("FAC_MIN = ", FAC_min, sep=""))
-  print(paste("<<< New FAC = ", FAC, " >>>", sep=""))
+  #print(paste("**** M = ", m, sep=""))
+  #print(paste("Max_out = ", smax, sep=""))
+  #print(paste("Max_in = ", tmax, sep=""))
+  #print(paste("Min_in = ", tmin, sep=""))
+  #print(paste("FAC_MIN = ", FAC_min, sep=""))
+  #print(paste("<<< New FAC = ", FAC, " >>>", sep=""))
 
   divFac <- FAC*m
   if (divFac == 0) return(TRUE)
@@ -142,9 +143,9 @@ sortedLayerDrawWithSwaps <- function(gIN, color1, color2, drawPlot, dBug) {
   curTargetInDeg <- rep(0, length(targetInDegNew))
   
   if (dBug == TRUE) {
-    print(paste("sourceOutDeg", toString(sourceOutDeg), sep="="))
-    print(paste("targetInDeg", toString(targetInDeg), sep="="))
-    print(paste("targetInDegNew", toString(targetInDegNew), sep="="))
+    #print(paste("sourceOutDeg", toString(sourceOutDeg), sep="="))
+    #print(paste("targetInDeg", toString(targetInDeg), sep="="))
+    #print(paste("targetInDegNew", toString(targetInDegNew), sep="="))
     #Added by Mitra to get infor for IIRG
     #dBug <- FALSE
   }
@@ -302,10 +303,8 @@ sortedLayerDrawWithSwaps <- function(gIN, color1, color2, drawPlot, dBug) {
       drawnIdxs <- unsatTargetInDegIdx
     }
     else {
-print(Sys.time())
 
       drawnIdxs <- sample(unsatTargetInDegIdx, deg, prob=samplingWeights)
-print(Sys.time())
 
     }
     curTargetInDeg[drawnIdxs] <- curTargetInDeg[drawnIdxs] + 1
@@ -331,7 +330,7 @@ print(Sys.time())
     plot(gNew, layout=layout.circle, vertex.label=V(gNew)$name)
   }
 
-  print(paste(toString(countSwaps), " Swaps Performed in Layer ", color1, ",", color2, sep=""))
+#  print(paste(toString(countSwaps), " Swaps Performed in Layer ", color1, ",", color2, sep=""))
 
   if (!(all(curTargetInDeg == targetInDegNew))) {
     exitVal <- 1
@@ -347,8 +346,13 @@ print(Sys.time())
 
 # Program body
 set.seed(as.integer(inputSeed))
-print(Sys.time())
+#print(Sys.time())
 success <- drawRandGraphWithSwaps(edgefile, vertexfile, edgefileout)
-print(paste("success", toString(success), sep="="))
-print(Sys.time())
+#print(paste("success", toString(success), sep="="))
+if (success == "TRUE") {
+	print(paste("warswap: Success in generating random graph (", edgefileout,")", sep=""))
+} else {
+	print(paste("warswap: Failure in generating random graph (", edgefileout,")", sep=""))
+}
+#print(Sys.time())
 

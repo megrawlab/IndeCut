@@ -14,3 +14,4 @@ vertexfile=$ingraphbase.igraph.vertices.txt
 inputSeed=`./getInputSeed.pl $seedfile $num`
 edgefileout=$graphname.rand.$num.igraph
 ./oneRandGraphDrawWithSwapsSeeded.sh $edgefile $vertexfile $igraphdir/$edgefileout $igraphroutdir/$edgefileout.Rout $inputSeed
+#grep "success=" $igraphroutdir/$edgefileout.Rout
