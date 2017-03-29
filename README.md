@@ -66,10 +66,16 @@ Four network motif discover tools along with their source codes are provided und
 7. The cut norm estimates for each algorithm  will be saved into `results` directory (`results/$graphname.cutnorms.txt`).
 
 ## Troubleshooting
+IndeCut package contains different network motif tools which have their own requirements. Some sommon problem may arise while running given package which we provide solution for them as follows:
+
 * comoFinder compile error:
-  ** Why: This happens for two reasons: 1) The java is not installed, or 2) Installed java version is older than 1.8
-  ** Solution: Install java or update it to newest version
+  Why: This happens for two reasons: 1) The java is not installed, or 2) Installed java version is older than 1.8
+  Solution: Install java or update it to newest version
   
+* WaRSwap error:
+  Why: R is not installed in your machine or GNU gmp library is not installed or `libgmp.so.3` is not in the library path (such as /usr/bin)
+  Solution: Download and install R from https://www.r-project.org.
+  If R is already installed on your machine, download and install GNU gmp package from https://gmplib.org. Follow the instructions to make sure that the `gmp` libs are installed. If you still get the error from WaRSwap, it means you need to create a softlink (or copy the library from where it is installed) to libgmp.so.4 in the `/usr/lib` directory.
  
 
 ### datasets
