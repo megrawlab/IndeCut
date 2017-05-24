@@ -1,4 +1,4 @@
-CTCF proximal_filtered MYBPC3
+ CTCF proximal_filtered MYBPC3
 CTCF proximal_filtered PDHA1
 CTCF proximal_filtered ROM1
 CTCF proximal_filtered NCF4
