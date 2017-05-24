@@ -1,4 +1,4 @@
-# This script will take one of Mitra's .igraphs directory, loop through the created files, doing n at a time, form S = 1/n S_n, d_C(Z,S)
+# Generate plots for the number of samples vs. cutnorm estimates
 import os, sys, copy, subprocess, scipy, scipy.linalg
 import numpy as np
 import multiprocessing
