@@ -1,5 +1,5 @@
 # IndeCUT
-IndeCut is the very first and only method to date that evaluates the performance of network motif discovery algorithms on any network of interest. IndeCut takes advantage of a novel cut-norm based approach to evaluate independent and uniform background network generation.
+IndeCut is the first and only method to date that evaluates the performance of network motif discovery algorithms on any network of interest. IndeCut takes advantage of a novel cut-norm based approach to evaluate independent and uniform background network generation.
 
 ## Requirements
 + Linux operating system
