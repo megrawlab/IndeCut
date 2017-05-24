@@ -1,5 +1,5 @@
 # IndeCUT
-A cut norm based method to evaluate uniform and independent sampling in network motif discovery algorithms.
+IndeCut is a very first method that evaluates the performance of network motif discovery algorithms. It is a cut norm based method to evaluate uniform and independent sampling in network motif discovery algorithms.
 
 ## Requirements
 + Linux operating system
