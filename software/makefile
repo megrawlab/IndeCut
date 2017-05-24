@@ -1,3 +1,5 @@
+# This is the main exe file for whole program. Set required arguments and run it under linux OS.
+
 graphname = dronet_miR-TF
 input_degree_seq_file = input_networks/$(graphname).csv
 
