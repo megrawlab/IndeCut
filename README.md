@@ -1,4 +1,4 @@
-# IndeCUT
+# IndeCut
 IndeCut is the first and only method to date that evaluates the performance of network motif discovery algorithms on any network of interest. IndeCut takes advantage of a novel cut-norm based approach to evaluate independent and uniform background network generation.
 
 ## Requirements
@@ -33,7 +33,7 @@ Four network motif discovery tools along with their source code are provided in 
   ```
   
 4. Open the file `makefile` and perform the following changes (if required):
-  1. set PYTHON variable to the path that Python is installed on your computer.
+  1. Set PYTHON variable to the path that Python is installed on your computer.
     ```bash
     # Example
     PYTHON=/usr/bin/python
