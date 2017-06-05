@@ -3,9 +3,15 @@ import sys, os
 import math
 from numpy import dtype, float32
 
-nsources = 0
-ntargets = 0
-def create_net_from_file(input_dir, outfile):
+def create_net_from_file(degseq_file, input_dir, outfile):
+    assert isinstance(degseq_file, basestring), degseq_file
+    assert isinstance(input_dir, basestring), input_dir
+    assert isinstance(outfile, basestring), outfile
+    
+    fp = open(degseq_file, "r")
+    nsources = len(fp.readline().split(","))
+    ntargets = len(fp.readline().split(","))
+    
     sum_matrix = np.zeros((nsources, ntargets), dtype = float32)
     ngraphs = len(os.listdir(input_dir))
     for randfile in os.listdir(input_dir):
@@ -24,9 +30,6 @@ if __name__ == '__main__':
     print "main"
     in_arr =  sys.argv[1:]
     indir = in_arr[0]
-    src_outdeg = in_arr[1]
-    tgt_indeg = in_arr[2]
-    outfile = in_arr[3]
-    nsources = len(src_outdeg.split(","))
-    ntargets = len(tgt_indeg.split(","))
-    create_net_from_file(indir, outfile)
+    degseq_file = in_arr[1]
+    outfile = in_arr[2]
+    create_net_from_file(degseq_file, indir, outfile)

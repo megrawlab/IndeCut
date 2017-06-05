@@ -2,7 +2,7 @@
 JFLAGS = -g
 JC = javac
 JAR = jar
-JVM = 1.6
+JVM = 1.8
 out_jarfile = comofinder_randout.jar
 
 BIN = classes

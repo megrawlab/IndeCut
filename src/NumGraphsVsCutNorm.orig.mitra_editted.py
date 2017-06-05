@@ -1,4 +1,4 @@
-# Generate plots for the number of samples vs. cutnorm estimates
+# This script will take one of Mitra's .igraphs directory, loop through the created files, doing n at a time, form S = 1/n S_n, d_C(Z,S)
 import os, sys, copy, subprocess, scipy, scipy.linalg
 import numpy as np
 import multiprocessing
@@ -7,7 +7,7 @@ from itertools import *
 
 #################################
 # Cut norm functions
-def calc_cutnorm(file_path_max_ent, S, file_path_output, CSDP_exec_path, i):
+def calc_cutnorm(file_path_max_ent, S, file_path_output, CSDP_exec_path, i, method):
     #Read in files
     Z = np.genfromtxt(file_path_max_ent, delimiter=',')
     num_rows = np.shape(Z)[0]
@@ -18,8 +18,8 @@ def calc_cutnorm(file_path_max_ent, S, file_path_output, CSDP_exec_path, i):
         sys.exit(2)
     #Make input file for CSDP
     base_path = os.path.dirname(os.path.abspath(file_path_output))
-    CSDP_input_file = os.path.join(base_path, os.path.splitext(os.path.basename(file_path_output))[0]+'_'+str(i)+'_CSDPinput.dat-s')
-    CSDP_output_file = os.path.join(base_path, os.path.splitext(os.path.basename(file_path_output))[0]+'_'+str(i)+'_CSDPoutput.txt')
+    CSDP_input_file = os.path.join(base_path, os.path.splitext(os.path.basename(file_path_output))[0]+'_'+str(i)+'_' + method + '_CSDPinput.dat-s')
+    CSDP_output_file = os.path.join(base_path, os.path.splitext(os.path.basename(file_path_output))[0]+'_'+str(i)+'_' + method +'_CSDPoutput.txt')
     fid = open(CSDP_input_file,'w')
     D = Z-S
     is_exact = (D>=0).all()
@@ -33,6 +33,8 @@ def calc_cutnorm(file_path_max_ent, S, file_path_output, CSDP_exec_path, i):
     res = subprocess.check_output(cmd, shell = True)
     #Get primal value from res
     CSDP_primal_value = float(find_between(res,"Primal objective value: ", " \n"))/2
+    print(CSDP_primal_value)
+    print(CSDP_output_file)
     #Parse CSDP output
     fid = open(CSDP_output_file,"r")
     CSDP_output = fid.read()
@@ -141,7 +143,7 @@ def do_n_star(args):
 
 
 # Parallelize it
-def do_n(n, graph_directory, files_sorted):
+def do_n(n, graph_directory, files_sorted, method):
     for i in range(n):
         fid = open(os.path.join(graph_directory, files_sorted[i]), 'r')
         #print(files_sorted[i])
@@ -167,24 +169,25 @@ def do_n(n, graph_directory, files_sorted):
     for matrix in matrices:
         S = S + matrix
     S = S / float(len(matrices))
-    (left_end, right_end) = calc_cutnorm(file_path_max_ent, S, file_path_output, CSDP_exec_path, i)
+    (left_end, right_end) = calc_cutnorm(file_path_max_ent, S, file_path_output, CSDP_exec_path, i, method)
     return [left_end, right_end]
 
 ##################################
-graph = 'Encode_comoF_mir-GENE'
-zout = 'Encode_comoF_mir-GENE'
-thisdir = '/nfs0/BPP/Megraw_Lab/mitra/Projects/NetMotif/WaRSwap_uniformity/test_independence'
-nsamples_total = 5000
+graph = 'dronet_miR-TF'
+zout = graph
+thisdir = 'indecut_home'
+nsamples_total = 500
 nsubsamples = 50
 
 algDict = {}
-algDict["fanmod"] = thisdir + '/fanmod/fn_out/' + graph + '.5000/' + graph + '.5000.rand.fanmod'
-algDict['warswap'] = thisdir + '/warswap/wr_out/' + graph + '/' + graph + '.rand.igraph'
-algDict['diamcis'] = thisdir + '/diamcis/di_out/' + graph + '.5000/' + graph + '.5000.rand.diamcis'
-algDict['comofinder'] = thisdir + '/comofinder/cf_out/' + graph + '.5000'
+algDict["fanmod"] = thisdir + '/fanmod/fn_out/' + graph + '.5000/' + graph + '.rand.fanmod'
+algDict['warswap'] = thisdir + '/warswap/wr_out/' + graph + '.5000/' + graph + '.rand.igraph'
+algDict['diamcis'] = thisdir + '/diamcis/di_out/' + graph + '.5000/' + graph + '.rand.diamcis'
+algDict['comofinder'] = thisdir + '/comofinder/cf_out/' + graph + ''
 
 #method = 'fanmod'
-for method in ['fanmod', 'warswap', 'diamcis', 'comofinder']:
+#for method in ['fanmod', 'warswap', 'diamcis', 'comofinder']:
+for method in ['fanmod', 'warswap']:
     if method == 'fanmod':
         graph_directory = algDict['fanmod']
     elif method == 'warswap':
@@ -212,11 +215,11 @@ for method in ['fanmod', 'warswap', 'diamcis', 'comofinder']:
     endpoints = []
     pool = Pool(processes=multiprocessing.cpu_count())
     do_list = range(1, nsamples_total, nsubsamples)
-    res = pool.map(do_n_star, izip(do_list, repeat(graph_directory), repeat(files_sorted)), chunksize=1)
+    res = pool.map(do_n_star, izip(do_list, repeat(graph_directory), repeat(files_sorted), repeat(method)), chunksize=1)
     pool.close()
     pool.terminate()
     
-    outdir = thisdir + "/samples_vs_cutnorms_out"
+    outdir = "samples_vs_cutnorms_out"
     if not os.path.exists(outdir):
         os.makedirs(outdir)
     
