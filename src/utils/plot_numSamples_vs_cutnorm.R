@@ -20,10 +20,11 @@ outfile <- args[6]
 
 zcutnorm <- as.numeric(compute_z_bounds()[[1]])
 
-cf_path <- paste(path, graphname, "_comofinder_", nsamples_total,"_", nsubsamples, ".txt", sep = "")
-di_path <- paste(path, graphname, "_diamcis_", nsamples_total,"_", nsubsamples, ".txt", sep = "")
-wr_path <- paste(path, graphname, "_warswap_", nsamples_total,"_", nsubsamples, ".txt", sep = "")
-fn_path <- paste(path, graphname, "_fanmod_", nsamples_total,"_", nsubsamples, ".txt", sep = "")
+
+cf_path <- paste(path, "/", graphname, "_comofinder_", nsamples_total,"_", nsubsamples, ".txt", sep = "")
+di_path <- paste(path, "/", graphname, "_diamcis_", nsamples_total,"_", nsubsamples, ".txt", sep = "")
+wr_path <- paste(path, "/", graphname, "_warswap_", nsamples_total,"_", nsubsamples, ".txt", sep = "")
+fn_path <- paste(path, "/", graphname, "_fanmod_", nsamples_total,"_", nsubsamples, ".txt", sep = "")
 
 cf <- read.csv(cf_path, header=FALSE)
 di <- read.csv(di_path, header=FALSE)
