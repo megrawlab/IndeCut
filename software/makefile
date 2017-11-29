@@ -39,6 +39,9 @@ di_cutnorm = $(indecut_outdir)/$(graphname)_diamcis_$(ngraphs)_cutnorm.csv
 z_outfile = $(indecut_outdir)/$(graphname)_Z1_$(ngraphs).csv
 z_cutnorm = $(indecut_outdir)/$(graphname)_Z_$(ngraphs)_cutnorm.csv
 
+dummy_outdir = cutnorm_dummies/$(graphname)
+subsample_counts_outdir = sample_counts_out
+
 init:
 Rcore := $(shell command -v R 2> /dev/null)
 JAVA := $(shell command -v java 2> /dev/null)
@@ -68,7 +71,7 @@ endif
 
 #	$(MAKE) -f Makefile_check
 #### For serial execution of steps ####
-all_serial: compile_tools generate_graph_from_deg run_netmotifs compute_A compute_Z compute_cutnorms generate_results
+all_serial: compile_tools generate_graph_from_deg run_netmotifs compute_A compute_Z compute_cutnorms generate_results plot_subsamples
 
 #### Runs each step in parallel to speed up the whole procedure ####
 all_parallel:
@@ -78,6 +81,16 @@ all_parallel:
 	$(MAKE) compute_A -j 5
 	$(MAKE) compute_cutnorms -j 5
 	$(MAKE) generate_results
+	
+
+#### Get the plots for number of samples vs. performance
+num_subsamples = 10
+
+num_samples_analysis:
+	$(PYTHON) NumGraphsVsCutNorm.py $(graphname) $(ngraphs) $(num_subsamples) $(fn_rand_outdir) $(wr_rand_outdir) $(di_rand_outdir) $(cf_rand_outdir) $(z_outfile) $(CSDP) $(dummy_outdir) $(subsample_counts_outdir)
+
+plot_subsamples: num_samples_analysis
+	./plot_numSamples_vs_cutnorm.R $(graphname) $(ngraphs) $(num_subsamples) $(result_outfile) $(subsample_counts_outdir) $(subsample_counts_outdir)/samples_vs_cutnorms.png
 
 ##### Compile programs #######
 compile_tools: init make_diamcis make_fanmod make_comofinder
