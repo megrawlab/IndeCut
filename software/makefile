@@ -90,7 +90,7 @@ num_samples_analysis:
 	$(PYTHON) NumGraphsVsCutNorm.py $(graphname) $(ngraphs) $(num_subsamples) $(fn_rand_outdir) $(wr_rand_outdir) $(di_rand_outdir) $(cf_rand_outdir) $(z_outfile) $(CSDP) $(dummy_outdir) $(subsample_counts_outdir)
 
 plot_subsamples: num_samples_analysis
-	./plot_numSamples_vs_cutnorm.R $(graphname) $(ngraphs) $(num_subsamples) $(result_outfile) $(subsample_counts_outdir) $(subsample_counts_outdir)/samples_vs_cutnorms.png
+	./plot_numSamples_vs_cutnorm.R $(graphname) $(ngraphs) $(num_subsamples) $(result_outfile) $(subsample_counts_outdir) $(subsample_counts_outdir)/$(graphname)_samples_vs_cutnorms.png
 
 ##### Compile programs #######
 compile_tools: init make_diamcis make_fanmod make_comofinder
