@@ -11,8 +11,8 @@ compute_z_bounds <- function() {
 
 args <- commandArgs(trailingOnly = TRUE)
 graphname <- args[1]
-nsamples_total <- args[2]
-nsubsamples <- args[3]
+nsamples_total <- as.numeric(args[2])
+nsubsamples <- as.numeric(args[3])
 cutnorm_results <- args[4] # we get z_cutnorm bounds 
 displayName <- graphname
 path <- args[5] # out dir of 4 files related to each subsampling cutnorms
