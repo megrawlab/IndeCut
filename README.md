@@ -65,7 +65,9 @@ Four network motif discovery tools along with their source code are provided in 
 
 7. The cut norm estimates for each algorithm  will be saved into `results` directory (`results/$graphname.cutnorms.txt`).
 
-8. (new) we added a target named `plot_subsamples` in order to help user to visualize the relationship between number of samples and perfromance of the randomization method in terms of uniformity and independence. The plot will be saved in `sample_counts_out/$graphname_samples_vs_cutnorms.png`
+8. (New) We have added a target named `plot_subsamples` that can be called with ``make plot_subsamples``. This allows for a user to estimate the number of samples required to obtain satisfactory performance when motif finding. The cutnorm estimate of each method is plotted against the number graph samples used. The cutnorm estimate generally decreases (indicating more uniform and random graph sampling) as the number of graph samples is increased. When a point of "diminishing returns" is reached (i.e. when the decrease in the cutnorm becomes very small), an optimal number of samples has been achieved for a given tool.
+
+The plot will be saved in `sample_counts_out/$graphname_samples_vs_cutnorms.png`
 
 ## Troubleshooting
 IndeCut package contains different network motif tools which have their own requirements. Some common problems may arise, we provide solutions as follows:
